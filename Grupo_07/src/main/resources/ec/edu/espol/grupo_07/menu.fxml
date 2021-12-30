@@ -4,8 +4,20 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ec.edu.espol.controller.MenuController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ec.edu.espol.controller.MenuController">
    <children>
+      <Pane id="SelectionPane" fx:id="FigureSelectionPane" prefHeight="700.0" prefWidth="700.0" stylesheets="@menu.css">
+         <children>
+            <Pane id="SelectionFigurePane" fx:id="CircleSelected" layoutX="109.0" layoutY="287.0" onMouseClicked="#CircleSelection" prefHeight="200.0" prefWidth="200.0" stylesheets="@menu.css" />
+            <Pane id="SelectionFigurePane" fx:id="XSelected" layoutX="394.0" layoutY="287.0" onMouseClicked="#XSelection" prefHeight="200.0" prefWidth="200.0" stylesheets="@menu.css" />
+         </children>
+      </Pane>
+      <Pane id="WhosFirstPane" fx:id="WhosFirstPane" prefHeight="700.0" prefWidth="700.0" stylesheets="@menu.css">
+         <children>
+            <Pane id="SelectionFigurePane" fx:id="pcOption" layoutX="202.0" layoutY="316.0" onMouseClicked="#pcStarts" prefHeight="80.0" prefWidth="296.0" stylesheets="@menu.css" />
+            <Pane id="SelectionFigurePane" fx:id="playerOption" layoutX="202.0" layoutY="461.0" onMouseClicked="#PlayerStarts" prefHeight="80.0" prefWidth="296.0" stylesheets="@menu.css" />
+         </children>
+      </Pane>
       <Pane id="BackgroundPane" fx:id="Menu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" stylesheets="@menu.css">
          <children>
             <Button id="SelectionModeButton" fx:id="SinglePlayerOption" layoutX="168.0" layoutY="281.0" mnemonicParsing="false" onMouseClicked="#NormalMode" prefHeight="90.0" prefWidth="364.0" stylesheets="@menu.css" text="SINGLEPLAYER" textAlignment="CENTER">
@@ -23,18 +35,6 @@
                   <Font name="Century Gothic" size="36.0" />
                </font>
             </Button>
-         </children>
-      </Pane>
-      <Pane id="SelectionPane" fx:id="FigureSelectionPane" prefHeight="700.0" prefWidth="700.0" stylesheets="@menu.css">
-         <children>
-            <Pane id="SelectionFigurePane" fx:id="CircleSelected" layoutX="109.0" layoutY="287.0" onMouseClicked="#CircleSelection" prefHeight="200.0" prefWidth="200.0" stylesheets="@menu.css" />
-            <Pane id="SelectionFigurePane" fx:id="XSelected" layoutX="394.0" layoutY="287.0" onMouseClicked="#XSelection" prefHeight="200.0" prefWidth="200.0" stylesheets="@menu.css" />
-         </children>
-      </Pane>
-      <Pane id="WhosFirstPane" fx:id="WhosFirstPane" prefHeight="700.0" prefWidth="700.0" stylesheets="@menu.css">
-         <children>
-            <Pane id="SelectionFigurePane" fx:id="pcOption" layoutX="202.0" layoutY="316.0" onMouseClicked="#pcStarts" prefHeight="80.0" prefWidth="296.0" stylesheets="@menu.css" />
-            <Pane id="SelectionFigurePane" fx:id="playerOption" layoutX="202.0" layoutY="461.0" onMouseClicked="#PlayerStarts" prefHeight="80.0" prefWidth="296.0" stylesheets="@menu.css" />
          </children>
       </Pane>
    </children>

@@ -5,9 +5,13 @@
  */
 package ec.edu.espol.controller;
 
+import ec.edu.espol.Partida.PC;
+import ec.edu.espol.Partida.Player;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
 /**
@@ -17,6 +21,9 @@ import javafx.scene.text.Text;
  */
 public class GameController implements Initializable {
 
+    @FXML
+    private GridPane tableroActual;
+
     /**
      * Initializes the controller class.
      */
@@ -25,24 +32,16 @@ public class GameController implements Initializable {
         // TODO
     }    
     
-    public void CargarJuego(boolean Circle, boolean Equis, boolean pcStarts, boolean playerStarts){
-        if(Circle == true){
-            if(playerStarts == true){
-                
-            }
-            else{
-                
-            }        
-        }
-        else{
-            if(playerStarts == true){
-            
-            }
-            else{
-                
-            }
-        }
+    public void CargarJuego(boolean pcStarts, String playerFigure, String pcFigure ){
+        PC pc = new PC(pcFigure);
+        Player player = new Player(playerFigure);        
+        if(pcStarts == true){ // pc comienza
+            //metodo minimax que recibe tablero actual
+        }  
+        
         
     }
+    
+    
     
 }

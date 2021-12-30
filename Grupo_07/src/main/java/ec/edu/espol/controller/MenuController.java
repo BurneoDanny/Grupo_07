@@ -18,10 +18,10 @@ public class MenuController implements Initializable {
 
     @FXML
     private Pane CircleSelected;
-    private boolean Circle = false;
+    
     @FXML
     private Pane XSelected;
-    private boolean Equis = false;
+
     @FXML
     private Button SinglePlayerOption;
     @FXML
@@ -30,17 +30,20 @@ public class MenuController implements Initializable {
     private Button JustPcOption;
     @FXML
     private Pane pcOption;
-    private boolean pcStarts = false;
+
     @FXML
     private Pane playerOption;
-    private boolean playerStarts = false;
+
     @FXML
     private Pane WhosFirstPane;
     @FXML
     private Pane FigureSelectionPane;
     @FXML
     private Pane Menu;
-
+    
+    private String playerFigure;
+    private String pcFigure;
+    private boolean pcStarts;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -70,13 +73,16 @@ public class MenuController implements Initializable {
     @FXML
     private void CircleSelection(MouseEvent event) {
         WhosFirstPane.toFront();
-        Circle = true;
+        playerFigure = "circle";
+        pcFigure = "x";
+                
     }
 
     @FXML
     private void XSelection(MouseEvent event) {
         WhosFirstPane.toFront();
-        Equis = true;
+        playerFigure = "x";
+        pcFigure = "circle";
     }
 
     @FXML
@@ -87,7 +93,7 @@ public class MenuController implements Initializable {
 
     @FXML
     private void PlayerStarts(MouseEvent event) {
-        playerStarts = true;
+        pcStarts = false;
         start();
     }
     
@@ -97,7 +103,7 @@ public class MenuController implements Initializable {
             FXMLLoader fxmlloader = App.loadFXMLLoader("game");  
             App.setRoot(fxmlloader);
             GameController gc = fxmlloader.getController();  
-            gc.CargarJuego(Circle, Equis, pcStarts, playerStarts);
+            gc.CargarJuego(pcStarts,playerFigure, pcFigure);
         }
         catch(IOException ex){
             Alert a = new Alert(Alert.AlertType.ERROR, "No se pudo abrir el archivo fxml");

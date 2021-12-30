@@ -14,14 +14,14 @@ import javafx.scene.control.Button;
  *
  * @author User
  */
-public class Jugador implements utilidadID{
+public class jugador implements utilidadID{
     private Character jugador;
     private Character computadora;
-    public Jugador(){
+    public jugador(){
         jugador = null;
         computadora = null;
     }
-    public Jugador (String jg ){
+    public jugador (String jg ){
         if(isOperand(jg)){
             if(jg.toLowerCase() == "x"){
             jugador = "x".charAt(0);

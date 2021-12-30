@@ -1,7 +1,5 @@
-/*
- * Empty Stylesheet file.
- */
 
-.mainFxmlClass {
-
+#DemoGamePane{
+    -fx-background-image: url('images/gameLayout.png');
+    -fx-background-size: 100% 100%;
 }
