@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import javafx.scene.image.Image;
 
 
 public class App extends Application {
@@ -15,8 +16,11 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("menu"), 640, 480);
+        scene = new Scene(loadFXML("menu"));     
         stage.setScene(scene);
+        stage.setResizable(false);
+        stage.getIcons().add(new Image(App.class.getResourceAsStream("images/icon.png"))); // INSERTA IMAGEN EN LA PARTE SUPERIOR IZQUIERDAD DE LA VENTANA / LOGO DE APP
+        stage.setTitle("Proyecto Tic Tac Toe - GRUPO #"); 
         stage.show();
     }
     
