@@ -7,7 +7,7 @@ public class Player {
     debe tener de atributos a su utilidad dado un tablero
     su figura que se establece al inicio
     
-    */
+    */  
     String figure;
     int utilidad;
 
@@ -22,6 +22,8 @@ public class Player {
     public int getUtilidad(){
         return utilidad;
     }
+    
+    
     
     
 }

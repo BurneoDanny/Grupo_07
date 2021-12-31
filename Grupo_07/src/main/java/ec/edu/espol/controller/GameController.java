@@ -7,6 +7,7 @@ package ec.edu.espol.controller;
 
 import ec.edu.espol.Partida.PC;
 import ec.edu.espol.Partida.Player;
+import ec.edu.espol.Partida.Tablero;
 import ec.edu.espol.grupo_07.App;
 import java.io.File;
 import java.io.FileInputStream;
@@ -53,6 +54,7 @@ public class GameController implements Initializable {
     
     private PC pc;
     private Player player;
+    private Tablero tablero;
 
     private final Image circle = new Image(App.class.getResourceAsStream("images/circulo.png"));
     private final Image equis = new Image(App.class.getResourceAsStream("images/x.png"));
@@ -65,7 +67,8 @@ public class GameController implements Initializable {
     // carga la pc y al jugador con sus figuras correspondientemente y en caso de que empieza la pc, ejecuta minimax algorithm 
     public void CargarJuego(boolean pcStarts, String playerFigure, String pcFigure ){
         pc = new PC(pcFigure);
-        player = new Player(playerFigure);        
+        player = new Player(playerFigure);
+        tablero = new Tablero(tableroActual, player, pc);
         if(pcStarts == true){ // pc comienza
             //metodo minimax que recibe tablero actual
         }     
@@ -81,6 +84,10 @@ public class GameController implements Initializable {
            cell.setImage(player.getFigure().equals("x") ? equis : circle);  
         }    
     }
+    
+
+    
+    
     
     
     

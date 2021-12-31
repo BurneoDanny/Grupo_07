@@ -95,7 +95,6 @@ public class MenuController implements Initializable {
     
     private void start(){
         try{
-
             FXMLLoader fxmlloader = App.loadFXMLLoader("game");  
             App.setRoot(fxmlloader);
             GameController gc = fxmlloader.getController();  
