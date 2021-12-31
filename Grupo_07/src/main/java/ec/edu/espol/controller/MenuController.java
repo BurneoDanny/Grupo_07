@@ -17,11 +17,9 @@ import javafx.scene.layout.Pane;
 public class MenuController implements Initializable {
 
     @FXML
-    private Pane CircleSelected;
-    
+    private Pane CircleSelected;    
     @FXML
     private Pane XSelected;
-
     @FXML
     private Button SinglePlayerOption;
     @FXML
@@ -30,10 +28,8 @@ public class MenuController implements Initializable {
     private Button JustPcOption;
     @FXML
     private Pane pcOption;
-
     @FXML
     private Pane playerOption;
-
     @FXML
     private Pane WhosFirstPane;
     @FXML
