@@ -9,6 +9,7 @@ import ec.edu.espol.Partida.PC;
 import ec.edu.espol.Partida.Player;
 import ec.edu.espol.Partida.Tablero;
 import ec.edu.espol.grupo_07.App;
+import ec.edu.espol.util.util;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -56,8 +57,6 @@ public class GameController implements Initializable {
     private Player player;
     private Tablero tablero;
 
-    private final Image circle = new Image(App.class.getResourceAsStream("images/circulo.png"));
-    private final Image equis = new Image(App.class.getResourceAsStream("images/x.png"));
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {   
@@ -65,7 +64,7 @@ public class GameController implements Initializable {
     
     
     // carga la pc y al jugador con sus figuras correspondientemente y en caso de que empieza la pc, ejecuta minimax algorithm 
-    public void CargarJuego(boolean pcStarts, String playerFigure, String pcFigure ){
+    public void CargarJuego(boolean pcStarts, Image playerFigure, Image pcFigure ){
         pc = new PC(pcFigure);
         player = new Player(playerFigure);
         tablero = new Tablero(tableroActual, player, pc);
@@ -79,13 +78,14 @@ public class GameController implements Initializable {
     @FXML
     private void cellClicked(MouseEvent event) {
         ImageView cell = (ImageView)event.getSource();
-        if (!(cell.getImage() == circle || cell.getImage() == equis)){
-           System.out.println("added");
-           cell.setImage(player.getFigure().equals("x") ? equis : circle);  
-        }    
+        if (!(cell.getImage() == util.getCircle() || cell.getImage() == util.getEquis())){
+            cell.setImage(util.isImageEqual(player.getFigure(),util.getCircle()) ? util.getCircle() : util.getEquis());  
+        }
+        // inmediatamente despues de que de click se ejecuta el metodo minimax que recibe el tablero actual.
     }
     
 
+    
     
     
     

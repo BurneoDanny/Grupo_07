@@ -2,6 +2,7 @@
 package ec.edu.espol.controller;
 
 import ec.edu.espol.grupo_07.App;
+import ec.edu.espol.util.util;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -10,6 +11,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
@@ -37,8 +40,8 @@ public class MenuController implements Initializable {
     @FXML
     private Pane Menu;
     
-    private String playerFigure;
-    private String pcFigure;
+    private Image playerFigure;
+    private Image pcFigure;
     private boolean pcStarts;
     
     @Override
@@ -69,16 +72,16 @@ public class MenuController implements Initializable {
     @FXML
     private void CircleSelection(MouseEvent event) {
         WhosFirstPane.toFront();
-        playerFigure = "circle";
-        pcFigure = "x";
+        playerFigure = util.getCircle();
+        pcFigure = util.getEquis();
                 
     }
 
     @FXML
     private void XSelection(MouseEvent event) {
         WhosFirstPane.toFront();
-        playerFigure = "x";
-        pcFigure = "circle";
+        playerFigure = util.getEquis();
+        pcFigure = util.getCircle();
     }
 
     @FXML
@@ -98,7 +101,7 @@ public class MenuController implements Initializable {
             FXMLLoader fxmlloader = App.loadFXMLLoader("game");  
             App.setRoot(fxmlloader);
             GameController gc = fxmlloader.getController();  
-            gc.CargarJuego(pcStarts,playerFigure, pcFigure);
+            gc.CargarJuego(pcStarts, playerFigure, pcFigure);
         }
         catch(IOException ex){
             Alert a = new Alert(Alert.AlertType.ERROR, "No se pudo abrir el archivo fxml");

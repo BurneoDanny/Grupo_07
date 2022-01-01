@@ -1,6 +1,10 @@
 
 package ec.edu.espol.Partida;
 
+import javafx.scene.image.Image;
+
+
+
 
 public class Player {
     /*
@@ -8,14 +12,14 @@ public class Player {
     su figura que se establece al inicio
     
     */  
-    String figure;
-    int utilidad;
+    private Image figure;
+    private int utilidad;
 
-    public Player(String figure) {
+    public Player(Image figure) {
         this.figure = figure;
     }
 
-    public String getFigure() {
+    public Image getFigure() {
         return figure;
     }
     
