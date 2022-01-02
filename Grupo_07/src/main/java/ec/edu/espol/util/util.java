@@ -3,6 +3,7 @@ package ec.edu.espol.util;
 
 import ec.edu.espol.grupo_07.App;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 
 public class util {
@@ -41,4 +42,31 @@ public class util {
 
         return true;
     }  
+    
+    
+    public static boolean isThereImage(Image image){
+        return image != null;
+    }
+    
+    public static boolean isImageViewEqual(ImageView firstImage, ImageView secondImage){
+    // Prevent `NullPointerException`
+    if(firstImage != null && secondImage == null) return false;
+    if(firstImage == null) return secondImage == null;
+
+    // Compare images size
+    if(firstImage.getImage().getWidth() != secondImage.getImage().getWidth()) return false;
+    if(firstImage.getImage().getHeight() != secondImage.getImage().getHeight()) return false;
+
+    // Compare images color
+    for(int x = 0; x < firstImage.getImage().getWidth(); x++){
+        for(int y = 0; y < firstImage.getImage().getHeight(); y++){
+            int firstArgb = firstImage.getImage().getPixelReader().getArgb(x, y);
+            int secondArgb = secondImage.getImage().getPixelReader().getArgb(x, y);
+
+            if(firstArgb != secondArgb) return false;
+        }
+    }
+        return true;
+    }
+            
 }
