@@ -63,17 +63,18 @@ public class GameController implements Initializable {
 
     
     @Override
-    public void initialize(URL url, ResourceBundle rb) {   
+    public void initialize(URL url, ResourceBundle rb) { 
+        settingIndex(tableroActual);
     } 
     
     
     // carga la pc y al jugador con sus figuras correspondientemente y en caso de que empieza la pc, ejecuta minimax algorithm 
     public void CargarJuego(boolean pcStarts, Image playerFigure, Image pcFigure ){
-        settingIndex(tableroActual);
         pc = new PC(pcFigure);
         player = new Player(playerFigure);
         tablero = new Tablero(tableroActual, player, pc);
-        if(pcStarts == true){ // pc comienza
+        if(pcStarts == true){ 
+            // pc comienza
             //metodo minimax que recibe tablero actual
             tablero.bestSpot();
         }     
@@ -101,8 +102,7 @@ public class GameController implements Initializable {
                     }
                 }
             }              
-        }
-               
+        }           
     }
     
     private void settingIndex(GridPane tablero){  
