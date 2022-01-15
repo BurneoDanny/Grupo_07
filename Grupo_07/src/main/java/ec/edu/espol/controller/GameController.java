@@ -76,7 +76,9 @@ public class GameController implements Initializable {
         if(pcStarts == true){ 
             // pc comienza
             //metodo minimax que recibe tablero actual
-            tablero.bestSpot();
+            tablero.miniMaxUsingTrees();
+            //tablero.bestSpot();
+            
         }     
     }
 
@@ -88,21 +90,8 @@ public class GameController implements Initializable {
         ImageView cell = (ImageView)event.getSource();
         if (!(cell.getImage() == util.getCircle() || cell.getImage() == util.getEquis())){
             cell.setImage(util.isImageEqual(player.getFigure(),util.getCircle()) ? util.getCircle() : util.getEquis());
-            if(util.isImageViewEqual(tablero.checkWinner(), new ImageView(player.getFigure()))){
-                winner.setText("PLAYER WINS");
-            }
-            else{
-                tablero.bestSpot();
-                if(util.isImageViewEqual(tablero.checkWinner(), new ImageView(pc.getFigure()))){
-                    winner.setText("PC WINS HAHA NOOB");
-                }
-                else{
-                    if(cells.isEmpty()){
-                        winner.setText("EMPATE");
-                    }
-                }
-            }              
-        }           
+            tablero.miniMaxUsingTrees();
+        }  
     }
     
     private void settingIndex(GridPane tablero){  

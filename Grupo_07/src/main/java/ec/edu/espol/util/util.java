@@ -19,53 +19,60 @@ public class util {
         return equis;
     }
     
-    
-    
-    public static boolean isImageEqual(Image firstImage, Image secondImage){
-    // Prevent `NullPointerException`
-    if(firstImage != null && secondImage == null) return false;
-    if(firstImage == null) return secondImage == null;
-
-    // Compare images size
-    if(firstImage.getWidth() != secondImage.getWidth()) return false;
-    if(firstImage.getHeight() != secondImage.getHeight()) return false;
-
-    // Compare images color
-    for(int x = 0; x < firstImage.getWidth(); x++){
-        for(int y = 0; y < firstImage.getHeight(); y++){
-            int firstArgb = firstImage.getPixelReader().getArgb(x, y);
-            int secondArgb = secondImage.getPixelReader().getArgb(x, y);
-
-            if(firstArgb != secondArgb) return false;
-        }
+     // comprueba si 3 spots/celdas/imagesView son iguales  
+    public static boolean isEqual(Image a, Image b, Image c) {
+        return util.isImageEqual(a, b) && util.isImageEqual(b, c) && a != null;
     }
-
-        return true;
-    }  
     
-    
+      
     public static boolean isThereImage(Image image){
         return image != null;
     }
     
+    
+    
+    public static boolean isImageEqual(Image firstImage, Image secondImage){
+        // Prevent `NullPointerException`
+        if(firstImage != null && secondImage == null) return false;
+        if(firstImage == null) return secondImage == null;
+
+        // Compare images size
+        if(firstImage.getWidth() != secondImage.getWidth()) return false;
+        if(firstImage.getHeight() != secondImage.getHeight()) return false;
+        
+        /*
+        // Compare images color
+        for(int x = 0; x < firstImage.getWidth(); x++){
+            for(int y = 0; y < firstImage.getHeight(); y++){
+                int firstArgb = firstImage.getPixelReader().getArgb(x, y);
+                int secondArgb = secondImage.getPixelReader().getArgb(x, y);
+
+                if(firstArgb != secondArgb) return false;
+            }
+        }*/
+        return true;
+    }  
+    
     public static boolean isImageViewEqual(ImageView firstImage, ImageView secondImage){
-    // Prevent `NullPointerException`
-    if(firstImage != null && secondImage == null) return false;
-    if(firstImage == null) return secondImage == null;
+        // Prevent `NullPointerException`
+        if(firstImage != null && secondImage == null) return false;
+        if(firstImage == null) return secondImage == null;
 
-    // Compare images size
-    if(firstImage.getImage().getWidth() != secondImage.getImage().getWidth()) return false;
-    if(firstImage.getImage().getHeight() != secondImage.getImage().getHeight()) return false;
+        // Compare images size
+        if(firstImage.getImage().getWidth() != secondImage.getImage().getWidth()) return false;
+        if(firstImage.getImage().getHeight() != secondImage.getImage().getHeight()) return false;
 
-    // Compare images color
-    for(int x = 0; x < firstImage.getImage().getWidth(); x++){
-        for(int y = 0; y < firstImage.getImage().getHeight(); y++){
-            int firstArgb = firstImage.getImage().getPixelReader().getArgb(x, y);
-            int secondArgb = secondImage.getImage().getPixelReader().getArgb(x, y);
+        /*
+        // Compare images color
+        for(int x = 0; x < firstImage.getImage().getWidth(); x++){
+            for(int y = 0; y < firstImage.getImage().getHeight(); y++){
+                int firstArgb = firstImage.getImage().getPixelReader().getArgb(x, y);
+                int secondArgb = secondImage.getImage().getPixelReader().getArgb(x, y);
 
-            if(firstArgb != secondArgb) return false;
-        }
-    }
+                if(firstArgb != secondArgb) return false;
+            }
+        }*/
+        
         return true;
     }
             

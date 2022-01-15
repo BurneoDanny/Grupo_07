@@ -30,6 +30,19 @@ public class Tree<E> { // ARBOL MULTICAMINO
         return this.root == null;
     }
     
+     
+    public void recorrerArbol(){ 
+        if(!this.isEmpty()){
+            // 1. imprimir raiz
+            System.out.println(this.root.getContent());
+            // 2. recorro a sus hijos comprobando que los tenga
+            if(!this.root.getChildren().isEmpty()){
+                for(Tree<E> tree : this.root.getChildren()){
+                    tree.recorrerArbol();
+                }
+            }
+        }   
+    }
  
 }
 
