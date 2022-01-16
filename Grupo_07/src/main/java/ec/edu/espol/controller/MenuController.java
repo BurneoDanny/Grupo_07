@@ -20,52 +20,35 @@ import javafx.scene.layout.Pane;
 public class MenuController implements Initializable {
 
     @FXML
-    private Pane CircleSelected;    
-    @FXML
-    private Pane XSelected;
-    @FXML
-    private Button SinglePlayerOption;
-    @FXML
-    private Button TwoPlayersOption;
-    @FXML
-    private Button JustPcOption;
-    @FXML
-    private Pane pcOption;
-    @FXML
-    private Pane playerOption;
-    @FXML
     private Pane WhosFirstPane;
     @FXML
     private Pane FigureSelectionPane;
     @FXML
-    private Pane Menu;
+    private Pane Menu;        
+    @FXML
+    private Pane FirstPlayerSelectionPane;
+    @FXML
+    private Pane SecondPlayerSelectionPane;
+    @FXML
+    private ImageView definitiveSecondPlayerFigure;
+    @FXML
+    private ImageView startIndicador;
     
     private Image playerFigure;
     private Image pcFigure;
     private boolean pcStarts;
+    private Image secondPlayerFigure;
+  
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         Menu.toFront();
     }  
     
-
-
-
     @FXML
     private void NormalMode(MouseEvent event) {
         FigureSelectionPane.toFront();
         
-        
-    }
-
-    @FXML
-    private void TwoPlayersMode(MouseEvent event) {
-        
-    }
-
-    @FXML
-    private void JustPcMode(MouseEvent event) {
         
     }
 
@@ -87,16 +70,16 @@ public class MenuController implements Initializable {
     @FXML
     private void pcStarts(MouseEvent event) {
         pcStarts = true;
-        start();
+        startSinglePlayerMode();
     }
 
     @FXML
     private void PlayerStarts(MouseEvent event) {
         pcStarts = false;
-        start();
+        startSinglePlayerMode();
     }
     
-    private void start(){
+    private void startSinglePlayerMode(){
         try{
             FXMLLoader fxmlloader = App.loadFXMLLoader("game");  
             App.setRoot(fxmlloader);
@@ -106,7 +89,79 @@ public class MenuController implements Initializable {
         catch(IOException ex){
             Alert a = new Alert(Alert.AlertType.ERROR, "No se pudo abrir el archivo fxml");
             a.show();
-        } 
-    
+        }  
     }
+    
+    
+    //----------------------- PLAYER VS PLAYER MODE
+    
+    @FXML
+    private void TwoPlayersMode(MouseEvent event) {
+        FirstPlayerSelectionPane.toFront();
+        
+    }
+    
+
+    @FXML
+    private void FirstPlayerCircleSelection(MouseEvent event) {
+        SecondPlayerSelectionPane.toFront();
+        playerFigure = util.getCircle();
+        secondPlayerFigure = util.getEquis();
+        definitiveSecondPlayerFigure.setImage(secondPlayerFigure);
+        startIndicador.setImage(util.getIndicador());
+        
+    }
+
+    @FXML
+    private void FirstPlayerXSelection(MouseEvent event) {
+        SecondPlayerSelectionPane.toFront();
+        playerFigure = util.getEquis();
+        secondPlayerFigure = util.getCircle();
+        definitiveSecondPlayerFigure.setImage(secondPlayerFigure);
+        startIndicador.setImage(util.getIndicador());
+    }
+    
+    @FXML
+    private void startTwoPlayersGame(MouseEvent event) {
+        try{
+            FXMLLoader fxmlloader = App.loadFXMLLoader("twoPlayersMode");  
+            App.setRoot(fxmlloader);
+            TwoPlayersModeController tpmc = fxmlloader.getController();
+            tpmc.CargarJuego(playerFigure, secondPlayerFigure);
+            
+        }
+        catch(IOException ex){
+            Alert a = new Alert(Alert.AlertType.ERROR, "No se pudo abrir el archivo fxml");
+            a.show();
+        }
+    }
+
+    
+    
+    //----------------------- PC VS PC MODE
+    @FXML
+    private void JustPcMode(MouseEvent event) {
+        try{
+            FXMLLoader fxmlloader = App.loadFXMLLoader("justPcMode");  
+            App.setRoot(fxmlloader);
+            JustPcModeController jpmc = fxmlloader.getController();
+            jpmc.CargarJuego(util.getCircle(), util.getEquis());  
+        }
+        catch(IOException ex){
+            Alert a = new Alert(Alert.AlertType.ERROR, "No se pudo abrir el archivo fxml");
+            a.show();
+        }
+    }
+    
+    
+    //----------------------------- BOTON CAMBIOS DE ESTILO
+    @FXML
+    private void changeStyle(MouseEvent event) {
+
+        Menu.setId("BackgroundOscuroPane");
+        //Menu.getStylesheets().add("BackgroundOscuroPane");
+        //Menu.setStyle("css/modoOscuro/BackgroundOscuroPane");
+    }
+
+    
 }

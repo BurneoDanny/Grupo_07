@@ -1,0 +1,5 @@
+
+#DemoGamePane{
+    -fx-background-image: url('../images/mb/gameLayout.png');
+    -fx-background-size: 100% 100%;
+}

@@ -1,65 +1,46 @@
+
 package ec.edu.espol.Partida;
 
-import ec.edu.espol.TDAs.NodeTree;
 import ec.edu.espol.TDAs.Tree;
-import ec.edu.espol.grupo_07.App;
 import ec.edu.espol.util.util;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
-public class Tablero {
 
+public class TableroPCVPC {
     private GridPane gridpane;
-    private Player player;
     private PC pc;
+    private PC pcOponente;
     private int utilidad;
     private ImageView newCelda;
 
-    public Tablero(GridPane tablero, Player player, PC pc) {
-        this.gridpane = tablero;
-        this.player = player;
-        this.pc = pc;
-    }
-
-    public GridPane getGridpane() {
-        return gridpane;
-    }
-
-    public void setGridpane(GridPane gridpane) {
+    public TableroPCVPC(GridPane gridpane, PC pc, PC pcOponente) {
         this.gridpane = gridpane;
+        this.pc = pc;
+        this.pcOponente = pcOponente;
     }
+    
 
     public int getUtilidad() {
         return utilidad;
     }
 
-    public void setUtilidad(int mejorUtilidad) {
-        this.utilidad = mejorUtilidad;
+    public void setUtilidad(int utilidad) {
+        this.utilidad = utilidad;
     }
-
+     
     public ImageView getNewCelda() {
         return newCelda;
     }
 
-    public void setNewCelda(ImageView bestCelda) {
-        this.newCelda = bestCelda;
-    }
-
-    public Player getPlayer() {
-        return player;
-    }
-
-    public PC getPc() {
-        return pc;
+    public void setNewCelda(ImageView newCelda) {
+        this.newCelda = newCelda;
     }
     
-    
-
     // retorna la ImageView dado el index de fila y columna. 
     private ImageView getNodeByRowColumnIndex(final int row, final int column) {
         ImageView result = null;
@@ -98,10 +79,10 @@ public class Tablero {
     }
     
     private ImageView getBestSpot() {
-        Tree<Tablero> mainTree = createTree();
+        Tree<TableroPCVPC> mainTree = createTree();
         int mayorUtilidad = -10000;
-        Tablero bestTablero = new Tablero(this.gridpane, this.player, this.pc);
-        for (Tree<Tablero> hijo : mainTree.getRoot().getChildren()) {
+        TableroPCVPC bestTablero = new TableroPCVPC(this.gridpane, this.pc, this.pcOponente);
+        for (Tree<TableroPCVPC> hijo : mainTree.getRoot().getChildren()) {
             int hijoUtilidad = 0;
             if(hijo.getRoot().getChildren().isEmpty()) {
                 hijoUtilidad = hijo.getRoot().getContent().getUtilidad();
@@ -124,22 +105,22 @@ public class Tablero {
         return bestTablero.getNewCelda();
     }
 
-    private int getMinUtilidad(Tree<Tablero> hijo) {
+    private int getMinUtilidad(Tree<TableroPCVPC> hijo) {
         int utilidadMinima = 10000;
-        for (Tree<Tablero> arbolHoja : hijo.getRoot().getChildren()) {
+        for (Tree<TableroPCVPC> arbolHoja : hijo.getRoot().getChildren()) {
             int utilidadTablero = arbolHoja.getRoot().getContent().getUtilidad();
             utilidadMinima = Math.min(utilidadMinima, utilidadTablero);
         }
         return utilidadMinima;
     }
 
-    private Tree<Tablero> createTree() {
-        Tree<Tablero> mainTree = new Tree(this);
+    private Tree<TableroPCVPC> createTree() {
+        Tree<TableroPCVPC> mainTree = new Tree(this);
         for (ImageView celda : emptyCells()) {
             celda.setImage(pc.getFigure());
-            Tablero tableroHijo = new Tablero(this.gridpane, this.player, this.pc);
+            TableroPCVPC tableroHijo = new TableroPCVPC(this.gridpane, this.pc, this.pcOponente);
             tableroHijo.setNewCelda(celda);
-            Tree<Tablero> hijo = new Tree(tableroHijo);
+            Tree<TableroPCVPC> hijo = new Tree(tableroHijo);
             mainTree.getRoot().getChildren().add(hijo);
             if (isThereWinner()) {
                 tableroHijo.setUtilidad(10);
@@ -147,9 +128,9 @@ public class Tablero {
             } 
             else {
                 for (ImageView cell : emptyCells()) {
-                    cell.setImage(player.getFigure());
-                    Tablero tableroHoja = new Tablero(this.gridpane, this.player, this.pc);
-                    Tree<Tablero> arbolHoja = new Tree(tableroHoja);
+                    cell.setImage(pcOponente.getFigure());
+                    TableroPCVPC tableroHoja = new TableroPCVPC(this.gridpane, this.pc, this.pcOponente);
+                    Tree<TableroPCVPC> arbolHoja = new Tree(tableroHoja);
                     hijo.getRoot().getChildren().add(arbolHoja);
                     if(isThereWinner()){
                         tableroHoja.setUtilidad(-10); 
@@ -167,83 +148,28 @@ public class Tablero {
         return mainTree;
     }
 
-    // decide cual es la mejor celda donde podria la pc poner su figura.
-    public void bestSpot() {
-        int bestUtilidad = -10000;
-        ArrayList<ImageView> celdasVacias = emptyCells();
-        ImageView bestCell = new ImageView();
-        for (ImageView celda : celdasVacias) {
-            celda.setImage(pc.getFigure());
-            if (isThereWinner()) {
-                bestUtilidad = returnWinnerInteger();
-                celda.setImage(null);
-                bestCell.setId(celda.getId());
-            } else {
-                int MayorUtilidad = miniMax();
-                celda.setImage(null);
-                if (MayorUtilidad > bestUtilidad) {
-                    bestUtilidad = MayorUtilidad;
-                    bestCell.setId(celda.getId());
-                }
-            }
-        }
-        ObservableList<Node> childrens = gridpane.getChildren();
-        for (Node node : childrens) {
-            ImageView nodo = (ImageView) node;
-            if (nodo.getId().equals(bestCell.getId())) {
-                nodo.setImage(pc.getFigure());
-            }
-        }
-    }
 
-    // retorna un integer que nos dice cual movimiento deberia hacer la pc.
-    private int miniMax() {
-        //Tree<GridPane> tableros = new Tree(tablero);
-        ArrayList<ImageView> cells = emptyCells();
-
-        int bestUtilidad = 10000;
-        for (ImageView cell : cells) {
-            cell.setImage(player.getFigure());
-            if (isThereWinner()) {
-                bestUtilidad = returnWinnerInteger();
-                cell.setImage(null);
-            } else {
-                int utilidad = getPCUtilidad();
-                cell.setImage(null);
-                bestUtilidad = Math.min(utilidad, bestUtilidad);
-            }
-        }
-        return bestUtilidad;
-    }
-
-    // check if there is a winner or tie
     public boolean isThereWinner() {
         return returnWinnerInteger() == 10 || returnWinnerInteger() == -10;
     }
 
-    /*
-        retorna -10 si el player gana, 10 si la pc gana y 0 si hay empate. 
-        Si nadie ha ganado retorna por defecto 1.
-     */
+   
     public int returnWinnerInteger() {
         ImageView result = returnWinnerFigure();
         if (result != null) {
-            if (util.isImageEqual(result.getImage(), player.getFigure())) {
+            if (util.isImageEqual(result.getImage(), pcOponente.getFigure())) {
                 return -10; // gana player
             } else if (util.isImageEqual(result.getImage(), pc.getFigure())) {
                 return 10; //gane pc
             }
         }
-        if (checkEmpate()) {
+        if (isThereEmpate()) {
             return 0;
         }
         return 1;
     }
 
-    /*
-        Retorna la imageView/figura de quien gano, ya se diagonalmente, horizontalmente o verticalmente. 
-        y retorna null si hay empate o si nadie ha ganado todavia. 
-     */
+   
     public ImageView returnWinnerFigure() {
         ImageView winnerFigure = null;
         // horizontal
@@ -276,33 +202,18 @@ public class Tablero {
         return winnerFigure;
     }
 
-    // comprueba si hay empate
-    public boolean checkEmpate() {
+   
+    public boolean isThereEmpate() {
         return returnWinnerFigure() == null && emptyCells().isEmpty();
     }
 
-    // metodo que obtiene la utilidad del pc   
+    
     public int getPCUtilidad() {
-        return obtenerValorPdePC() - obtenerValorPdePlayer();
+        return obtenerValorPdePC() - obtenerValorPdePCOponente();
     }
 
-    // metodo que obtiene el valor P de Player
-    private int obtenerValorPdePlayer() {
-        int valorP;
-        if (util.isImageEqual(player.getFigure(), util.getCircle())) {
-            valorP = 8 - (comprobarFilas(util.getEquis())
-                    + comprobarColumnas(util.getEquis())
-                    + comprobarDiagonales(util.getEquis()));
 
-        } else {
-            valorP = 8 - (comprobarFilas(util.getCircle())
-                    + comprobarColumnas(util.getCircle())
-                    + comprobarDiagonales(util.getCircle()));
-        }
-        return valorP;
-    }
-
-    // metodo que obtiene el valor P de PC
+  
     private int obtenerValorPdePC() {
         int valorP;
         if (util.isImageEqual(pc.getFigure(), util.getCircle())) {
@@ -317,28 +228,40 @@ public class Tablero {
         }
         return valorP;
     }
+   
+    private int obtenerValorPdePCOponente() {
+        int valorP;
+        if (util.isImageEqual(pcOponente.getFigure(), util.getCircle())) {
+            valorP = 8 - (comprobarFilas(util.getEquis())
+                    + comprobarColumnas(util.getEquis())
+                    + comprobarDiagonales(util.getEquis()));
 
-    /*
-        los siguientes metodos retornan el numero que representa el numero de filas, columnas 
-        y diagonales donde se encuentra esa figura
-    */
+        } else {
+            valorP = 8 - (comprobarFilas(util.getCircle())
+                    + comprobarColumnas(util.getCircle())
+                    + comprobarDiagonales(util.getCircle()));
+        }
+        return valorP;
+    }
+
+   
     private int comprobarFilas(Image figure) {
         int contador1 = 0;
         int contador2 = 0;
         int contador3 = 0;
         for (int i = 0; i < gridpane.getChildren().size(); i++) { // todas las columnas, pero mas eficiente
             ImageView imageView = (ImageView) gridpane.getChildren().get(i);
-            if (imageView.getId().equals("Cell1") || imageView.getId().equals("Cell2") || imageView.getId().equals("Cell3")) {
+            if (imageView.getId().equals("celda1") || imageView.getId().equals("celda2") || imageView.getId().equals("celda3")) {
                 if (util.isImageEqual(imageView.getImage(), figure)) {
                     contador1 = 1;
                 }
             }
-            if (imageView.getId().equals("Cell4") || imageView.getId().equals("Cell5") || imageView.getId().equals("Cell6")) {
+            if (imageView.getId().equals("celda4") || imageView.getId().equals("celda5") || imageView.getId().equals("celda6")) {
                 if (util.isImageEqual(imageView.getImage(), figure)) {
                     contador2 = 1;
                 }
             }
-            if (imageView.getId().equals("Cell7") || imageView.getId().equals("Cell8") || imageView.getId().equals("Cell9")) {
+            if (imageView.getId().equals("celda7") || imageView.getId().equals("celda8") || imageView.getId().equals("celda9")) {
                 if (util.isImageEqual(imageView.getImage(), figure)) {
                     contador3 = 1;
                 }
@@ -354,17 +277,17 @@ public class Tablero {
 
         for (int i = 0; i < gridpane.getChildren().size(); i++) { // todas las columnas, pero mas eficiente
             ImageView imageView = (ImageView) gridpane.getChildren().get(i);
-            if (imageView.getId().equals("Cell1") || imageView.getId().equals("Cell4") || imageView.getId().equals("Cell7")) {
+            if (imageView.getId().equals("celda1") || imageView.getId().equals("celda4") || imageView.getId().equals("celda7")) {
                 if (util.isImageEqual(imageView.getImage(), figure)) {
                     contador1 = 1;
                 }
             }
-            if (imageView.getId().equals("Cell2") || imageView.getId().equals("Cell5") || imageView.getId().equals("Cell8")) {
+            if (imageView.getId().equals("celda2") || imageView.getId().equals("celda5") || imageView.getId().equals("celda8")) {
                 if (util.isImageEqual(imageView.getImage(), figure)) {
                     contador2 = 1;
                 }
             }
-            if (imageView.getId().equals("Cell3") || imageView.getId().equals("Cell6") || imageView.getId().equals("Cell9")) {
+            if (imageView.getId().equals("celda3") || imageView.getId().equals("celda6") || imageView.getId().equals("celda9")) {
                 if (util.isImageEqual(imageView.getImage(), figure)) {
                     contador3 = 1;
                 }
@@ -380,12 +303,12 @@ public class Tablero {
         for (int i = 0; i < gridpane.getChildren().size(); i++) { // las dos diagonales
             ImageView imageView = (ImageView) gridpane.getChildren().get(i);
 
-            if (imageView.getId().equals("Cell1") || imageView.getId().equals("Cell5") || imageView.getId().equals("Cell9")) {
+            if (imageView.getId().equals("celda1") || imageView.getId().equals("celda5") || imageView.getId().equals("celda9")) {
                 if (util.isImageEqual(imageView.getImage(), figure)) {
                     contador1 = 1;
                 }
             }
-            if (imageView.getId().equals("Cell3") || imageView.getId().equals("Cell5") || imageView.getId().equals("Cell7")) {
+            if (imageView.getId().equals("celda3") || imageView.getId().equals("celda5") || imageView.getId().equals("celda7")) {
                 if (util.isImageEqual(imageView.getImage(), figure)) {
                     contador2 = 1;
                 }
@@ -393,5 +316,9 @@ public class Tablero {
         }
         return contador1 + contador2;
     }
-
+     
+ 
+    
+    
+    
 }

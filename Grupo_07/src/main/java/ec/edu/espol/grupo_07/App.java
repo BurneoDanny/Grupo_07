@@ -19,7 +19,7 @@ public class App extends Application {
         scene = new Scene(loadFXML("menu"));     
         stage.setScene(scene);
         stage.setResizable(false);
-        stage.getIcons().add(new Image(App.class.getResourceAsStream("images/icon.png"))); // INSERTA IMAGEN EN LA PARTE SUPERIOR IZQUIERDAD DE LA VENTANA / LOGO DE APP
+        stage.getIcons().add(new Image(App.class.getResourceAsStream("images/icon.png"))); 
         stage.setTitle("Proyecto Tic Tac Toe - GRUPO #"); 
         stage.show();
     }

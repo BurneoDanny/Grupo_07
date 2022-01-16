@@ -8,8 +8,9 @@ import javafx.scene.image.ImageView;
 
 public class util {
     
-    private static final Image circle = new Image(App.class.getResourceAsStream("images/circulo.png"));
-    private static final Image equis = new Image(App.class.getResourceAsStream("images/x.png"));
+    private static final Image circle = new Image(App.class.getResourceAsStream("images/mb/Figuras/circulo.png"));
+    private static final Image equis = new Image(App.class.getResourceAsStream("images/mb/Figuras/x.png"));
+    private static final Image indicador = new Image(App.class.getResourceAsStream("images/mb/indicador1.gif"));
 
     public static Image getCircle() {
         return circle;
@@ -17,6 +18,10 @@ public class util {
 
     public static Image getEquis() {
         return equis;
+    }
+    
+    public static Image getIndicador() {
+        return indicador;
     }
     
      // comprueba si 3 spots/celdas/imagesView son iguales  
