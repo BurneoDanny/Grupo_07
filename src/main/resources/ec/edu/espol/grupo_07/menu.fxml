@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ec.edu.espol.controller.MenuController">
+   <children>
+      <Pane id="SelectionPane" fx:id="FigureSelectionPane" prefHeight="700.0" prefWidth="700.0" stylesheets="@menu.css">
+         <children>
+            <Pane id="SelectionFigurePane" fx:id="CircleSelected1" layoutX="111.0" layoutY="14.0" onMouseClicked="#CircleSelection" prefHeight="200.0" prefWidth="478.0" stylesheets="@menu.css">
+               <children>
+                  <Label fx:id="selecioneSu" prefHeight="200.0" prefWidth="478.0" style="-fx-background-color: #FFFFFF;" text="Seleccione su simbolo:">
+                     <font>
+                        <Font name="System Italic" size="49.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane id="SelectionFigurePane" fx:id="CircleSelected" layoutX="109.0" layoutY="287.0" onMouseClicked="#CircleSelection" prefHeight="200.0" prefWidth="200.0" stylesheets="@menu.css" />
+            <Pane id="SelectionFigurePane" fx:id="XSelected" layoutX="394.0" layoutY="287.0" onMouseClicked="#XSelection" prefHeight="200.0" prefWidth="200.0" stylesheets="@menu.css" />
+         </children>
+      </Pane>
+      <Pane id="WhosFirstPane" fx:id="WhosFirstPane" prefHeight="700.0" prefWidth="700.0" stylesheets="@menu.css">
+         <children>
+            <Pane id="SelectionFigurePane" fx:id="pcOption" layoutX="202.0" layoutY="316.0" prefHeight="80.0" prefWidth="296.0" stylesheets="@menu.css">
+               <children>
+                  <Button fx:id="botonPC" mnemonicParsing="false" onMouseClicked="#pcStarts" prefHeight="80.0" prefWidth="296.0" style="-fx-background-color: #FFFFFF;" text="PC">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Pane>
+            <Pane id="SelectionFigurePane" fx:id="playerOption" layoutX="202.0" layoutY="461.0" prefHeight="80.0" prefWidth="296.0" stylesheets="@menu.css">
+               <children>
+                  <Button fx:id="BotonPlayer" mnemonicParsing="false" onMouseClicked="#PlayerStarts" prefHeight="80.0" prefWidth="296.0" style="-fx-background-color: #FFFFFF;" text="PLAYER">
+                     <font>
+                        <Font size="34.0" />
+                     </font>
+                  </Button>
+               </children></Pane>
+         </children>
+      </Pane>
+      <Pane id="BackgroundPane" fx:id="Menu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" stylesheets="@menu.css">
+         <children>
+            <Button id="SelectionModeButton" fx:id="SinglePlayerOption" layoutX="168.0" layoutY="281.0" mnemonicParsing="false" onMouseClicked="#NormalMode" prefHeight="90.0" prefWidth="364.0" stylesheets="@menu.css" text="SINGLEPLAYER" textAlignment="CENTER">
+               <font>
+                  <Font name="Century Gothic" size="36.0" />
+               </font>
+            </Button>
+            <Button id="SelectionModeButton" fx:id="TwoPlayersOption" layoutX="168.0" layoutY="407.0" mnemonicParsing="false" onMouseClicked="#TwoPlayersMode" prefHeight="90.0" prefWidth="364.0" stylesheets="@menu.css" text="1 VS 1" textAlignment="CENTER">
+               <font>
+                  <Font name="Century Gothic" size="36.0" />
+               </font>
+            </Button>
+            <Button id="SelectionModeButton" fx:id="JustPcOption" layoutX="168.0" layoutY="533.0" mnemonicParsing="false" onMouseClicked="#JustPcMode" prefHeight="90.0" prefWidth="364.0" stylesheets="@menu.css" text="PC VS PC" textAlignment="CENTER">
+               <font>
+                  <Font name="Century Gothic" size="36.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+   </children>
+</Pane>
