@@ -42,6 +42,9 @@ public class GameController implements Initializable {
     private PC pc;
     private Player player;
     private Tablero tablero;
+    private boolean pcStarts;
+    private Image playerFigure;
+    private Image pcFigure;
 
     @FXML
     private GridPane tableroActual;
@@ -75,7 +78,11 @@ public class GameController implements Initializable {
     public void CargarJuego(boolean pcStarts, Image playerFigure, Image pcFigure) {
         pc = new PC(pcFigure);
         player = new Player(playerFigure);
+        this.playerFigure= playerFigure;
+        this.pcFigure = pcFigure;
+        this.pcStarts = pcStarts;
         tablero = new Tablero(tableroActual, player, pc);
+        
         if (pcStarts == true) {
             tablero.miniMaxUsingTrees();
         }
@@ -86,15 +93,17 @@ public class GameController implements Initializable {
     private void cellClicked(MouseEvent event) {
         ArrayList<ImageView> cells = tablero.emptyCells();
         ImageView cell = (ImageView) event.getSource();
-        if (!tablero.isThereWinner() && !tablero.checkEmpate()) {
-            if (!(cell.getImage() == util.getCircle() || cell.getImage() == util.getEquis())) {
-                cell.setImage(util.isImageEqual(player.getFigure(), util.getCircle()) ? util.getCircle() : util.getEquis());
-                if(!tablero.isThereWinner() && !tablero.checkEmpate()){
-                    tablero.miniMaxUsingTrees();
-                }
+        if (!(cell.getImage() == util.getCircle() || cell.getImage() == util.getEquis())) {
+            cell.setImage(util.isImageEqual(player.getFigure(), util.getCircle()) ? util.getCircle() : util.getEquis());
+            if(!tablero.isThereWinner() && !tablero.checkEmpate()){
+                tablero.miniMaxUsingTrees();
             }
+            else{
+                showResult();
+             }
         }
-        else{
+        
+        if(tablero.isThereWinner()){
             showResult();
         }
     }
@@ -106,7 +115,7 @@ public class GameController implements Initializable {
             FXMLLoader fxmlloader = App.loadFXMLLoader("resultado");
             App.setRoot(fxmlloader);
             ResultadoController rc = fxmlloader.getController();
-            rc.CargarResultado(tablero,Cell1, Cell2, Cell3, Cell4, Cell5, Cell6, Cell7, Cell8, Cell9);
+            rc.CargarResultado(tablero,Cell1, Cell2, Cell3, Cell4, Cell5, Cell6, Cell7, Cell8, Cell9, playerFigure, pcFigure, pcStarts);
         } catch (IOException ex) {
             Alert a = new Alert(Alert.AlertType.ERROR, "No se pudo abrir el archivo fxml");
             a.show();

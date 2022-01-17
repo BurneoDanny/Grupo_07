@@ -275,7 +275,7 @@ public class Tablero {
         }
         return winnerFigure;
     }
-
+    
     // comprueba si hay empate
     public boolean checkEmpate() {
         return returnWinnerFigure() == null && emptyCells().isEmpty();
@@ -301,6 +301,8 @@ public class Tablero {
         }
         return valorP;
     }
+    
+    
 
     // metodo que obtiene el valor P de PC
     private int obtenerValorPdePC() {
