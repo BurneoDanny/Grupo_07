@@ -76,6 +76,7 @@ public class MenuController implements Initializable {
     @FXML
     private void NormalMode(MouseEvent event) {
         FigureSelectionPane.toFront();
+        juego.setModo(0);
         
         
     }

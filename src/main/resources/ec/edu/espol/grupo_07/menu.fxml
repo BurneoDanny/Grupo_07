@@ -13,7 +13,7 @@
                <children>
                   <Label fx:id="selecioneSu" prefHeight="200.0" prefWidth="478.0" style="-fx-background-color: #FFFFFF;" text="Seleccione su simbolo:">
                      <font>
-                        <Font name="System Italic" size="49.0" />
+                        <Font name="System Italic" size="36.0" />
                      </font>
                   </Label>
                </children>

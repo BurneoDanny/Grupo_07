@@ -15,7 +15,18 @@
    <left>
       <VBox prefHeight="700.0" prefWidth="136.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="UtilidadesTableros" text="Recomendacion:" visible="false" />
+            <Label fx:id="UtilidadesTableros" text="Recomendacion:" visible="false">
+               <font>
+                  <Font name="Bell MT" size="11.0" />
+               </font></Label>
+            <Button fx:id="pcvs" mnemonicParsing="false" onMouseClicked="#pcvspc" text="Siguiente Movimiento" visible="false">
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Bell MT" size="11.0" />
+               </font>
+            </Button>
          </children>
       </VBox>
    </left>
@@ -84,14 +95,14 @@
       </GridPane>
    </center>
    <right>
-      <VBox prefHeight="700.0" prefWidth="109.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="700.0" prefWidth="141.0" BorderPane.alignment="CENTER">
          <children>
             <Label fx:id="mostartSubArboles" visible="false">
                <VBox.margin>
                   <Insets left="25.0" />
                </VBox.margin>
                <font>
-                  <Font size="10.0" />
+                  <Font name="Bell MT" size="9.0" />
                </font>
             </Label>
          </children>
@@ -103,13 +114,31 @@
             <Insets top="-35.0" />
          </BorderPane.margin>
          <children>
-            <Button mnemonicParsing="false" onMouseClicked="#imprimirUtilidad" text="Pedir Ayuda" />
+            <Button fx:id="cambioPc" mnemonicParsing="false" onMouseClicked="#imprimirUtilidad" prefHeight="26.0" prefWidth="111.0" text="Pedir Ayuda">
+               <HBox.margin>
+                  <Insets left="25.0" />
+               </HBox.margin></Button>
+            <Button mnemonicParsing="false" onMouseClicked="#pantaInicio" text="Elegir Modo De Juego">
+               <HBox.margin>
+                  <Insets left="50.0" />
+               </HBox.margin>
+            </Button>
             <Button fx:id="volverJugar" alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#volverAJugar" prefHeight="23.0" prefWidth="91.0" text="Volver a Jugar">
                <HBox.margin>
-                  <Insets left="350.0" />
+                  <Insets left="50.0" />
                </HBox.margin></Button>
-            <Button mnemonicParsing="false" onMouseClicked="#imprimirArboles" text="Mostrar opcionesy su utilidad" />
+            <Button mnemonicParsing="false" onMouseClicked="#imprimirArboles" text="Mostrar opcionesy su utilidad">
+               <HBox.margin>
+                  <Insets left="50.0" />
+               </HBox.margin></Button>
          </children>
       </HBox>
    </bottom>
+   <top>
+      <Label fx:id="NombreGanador" prefHeight="70.0" prefWidth="311.0" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="System Bold Italic" size="24.0" />
+         </font>
+      </Label>
+   </top>
 </BorderPane>

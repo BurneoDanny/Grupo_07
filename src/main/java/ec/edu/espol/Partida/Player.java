@@ -13,7 +13,6 @@ public class Player {
     
     */  
     private String figure;
-    private int utilidad;
     public Player(){
         this.figure="kk";
     }
@@ -29,13 +28,7 @@ public class Player {
         this.figure = figure;
     }
 
-    public void setUtilidad(int utilidad) {
-        this.utilidad = utilidad;
-    }
     
-    public int getUtilidad(){
-        return utilidad;
-    }
     
     
     
