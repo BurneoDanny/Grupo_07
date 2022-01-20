@@ -213,7 +213,7 @@ public class GameController implements Initializable {
             MiniMax(arbolito2,player1.getFigure(),pc1.getFigure());//Minimax para el jugador 
             Tablero tablerop2 = playIA(arbolito2);
             tablerop2.generarCasillas();
-            this.imprimirOpciones(arbolito2.getRoot().getChildren(), mostartSubArboles);/// imprime en pantalla el mejor Tablero
+            this.imprimirOpciones(arbolito.getRoot().getChildren(), mostartSubArboles);/// imprime en pantalla el mejor Tablero
             
             this.mostratRecomendacion(tablerop2.getCasillas(), UtilidadesTableros,player1.getFigure());////////////// muestra todos los tableros y sus utilidades
               } else{
